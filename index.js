@@ -1,0 +1,36 @@
+// Import the necessary modules.
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+const mysql = require("mysql");
+const {body, validationResult} = require('express-validator');
+const port = 8089;
+
+// Initialise the DB object with the neccessary settings.
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "CalorieBuddy"
+});
+
+// Connect to the database.
+db.connect((err) => {
+    if (err)
+    {
+        throw error;
+    }
+    console.log("Connected to database");
+});
+global.db = db;
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+// Import the routes module.
+require("./routes/main")(app);
+
+app.use(express.static(__dirname + '/public'));
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
+app.engine("html", require("ejs").renderFile);
+app.listen(port, () => console.log(`Calorie Buddy app listening on port ${port}!`));

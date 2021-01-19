@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>List Foods | Calorie Buddy</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <link type="text/css" href="/topic7/mid-term/styles/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Navigation -->
+	    <header>
+            <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/topic7/mid-term/">
+                        <img src="/topic7/mid-term/img/logo.png" alt="Calorie Buddy logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/topic7/mid-term/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/topic7/mid-term/about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuTab" data-toggle="dropdown"
+                                    aria-expanded="false" aria-haspopup="true">Foods</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuTab">
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/add">Add Food</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/search">Search Food</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/searchToUpdate">Update Food</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/list">List Foods</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!--- Main Section -->
+        <main id="listFoodsMain">
+            <div id="listFoodsBanner">
+                <div id="listFoodsBannerText">
+                    <h1>Foods List</h1>
+                    <p>View all your foods in one place, including those you added, or make your own recipe</p>
+                </div>
+            </div>
+            <!-- Table Toolbar -->
+            <div id="toolbar" class="form-inline">
+                <label for="foodName">Recipe Name:</label>
+                <input name="Name" type="text" class="form-control" id="recipeName" placeholder="Enter your recipe's name" required>
+                <button id="make-recipe" class="btn btn-primary" data-toggle="modal" data-target="#showRecipe" disabled>
+                    Make Recipe
+                </button>
+            </div>
+            <!--- Food Table Section -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="listFoodTable">
+                    <thead>
+                        <tr class="table-danger">
+                            <th scope="col"><input type="checkbox" id="checkAll" onClick="isChecked(this)"></th>
+                            <th scope="col">Name of Food</th>
+                            <th scope="col">Typical Values</th>
+                            <th scope="col">Unit of the Typical Value</th>
+                            <th scope="col">Calories (kCal)</th>
+                            <th scope="col">Carbs (g)</th>
+                            <th scope="col">Fat (g)</th>
+                            <th scope="col">Protein (g)</th>
+                            <th scope="col">Salt (g)</th>
+                            <th scope="col">Sugar (g)</th>
+                            <th scope="col" style="width: 7%;">Quantity</th>
+                            <th scope="col">
+                                Update
+                            </th>
+                            <th scope="col">
+                                Delete
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <% if (availableFoods.length > 0) { %>
+                            <% availableFoods.forEach((food) => { %>  
+                                <tr>
+                                    <td><input type="checkbox" class="checkboxes" data-id="<%= food.id %>" onClick="isChecked(this)"></td>
+                                    <td><%= food.Name %></td>    
+                                    <td><%= food.TypicalValues %></td> 
+                                    <td><%= food.UnitOfTheTypicalValue %></td> 
+                                    <td><%= food.Calories %></td> 
+                                    <td><%= food.Carbs %></td>
+                                    <td><%= food.Fat %></td>
+                                    <td><%= food.Protein %></td>
+                                    <td><%= food.Salt %></td>
+                                    <td><%= food.Sugar %></td>
+                                    <td><input name="qty" type="number" class="form-control qty" id="qty" min="1" value="1" required></td>
+                                    <td>
+                                        <form action="/topic7/mid-term/update/<%= food.id %>" method="GET">
+                                            <button type="submit" class="btn btn-primary update">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger delete" data-id="<%= food.id %>" data-food-name="<%= food.Name %>"
+                                                data-toggle="modal" data-target="#confirmDelete" onClick="deleteBtnIsClicked(this)">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>    
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                                <tr>
+                                    <td colspan="13" id="no-match">No matching food item found, but don't worry, <a href="/topic7/mid-term/add">click here to add food.</a></td>
+                                </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Modal for Delete Confirmation -->
+            <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteLabel">Delete Record</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete this food?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <form action="/topic7/mid-term/foodDeleted" method="POST" id="deleteSubmission">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Recipe Calculation -->
+            <div class="modal fade" id="showRecipe" tabindex="-1" role="dialog" aria-labelledby="showRecipeLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="showRecipeLabel"></h5>
+                            <button type="button" id="recipe-close" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="recipeResults">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="/topic7/mid-term/scripts/script.js"></script>
+    </body>
+</html>

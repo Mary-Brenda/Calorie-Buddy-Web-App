@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Update Food | Calorie Buddy</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <link type="text/css" href="/topic7/mid-term/styles/style.css" rel="stylesheet">
+    </head>
+
+    <body id="updateFood">
+
+        <!-- Navigation -->
+        <header>
+            <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/topic7/mid-term/">
+                        <img src="/topic7/mid-term/img/logo.png" alt="Calorie Buddy logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/topic7/mid-term/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/topic7/mid-term/about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuTab" data-toggle="dropdown"
+                                    aria-expanded="false" aria-haspopup="true">Foods</a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuTab">
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/add">Add Food</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/search">Search Food</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/searchToUpdate">Update Food</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/topic7/mid-term/list">List Foods</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!--- Main Section -->
+        <main id="updateFoodMain">
+            <form id="updateFoodForm" action= "/topic7/mid-term/foodUpdated/<%= foodToBeUpdated[0].id %>" method="POST">
+                <fieldset>
+                    <legend class="formDesc">Update a Food Item</legend>
+                    <p class="formDesc">Please fill the form below to add a food item or recipe</p>
+                    <div class="form-group">
+                        <label for="foodName">Food Name*:</label>
+                        <input name="Name" type="text" class="form-control" id="foodName" 
+                            placeholder="Enter an food item or a recipe" 
+                            value="<%= foodToBeUpdated[0].Name %>" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-9">
+                            <label for="foodValues">Typical Value*:</label>
+                            <input name="TypicalValues" type="number" step="0.01" 
+                                class="form-control" id="foodValues" 
+                                placeholder="What quantity is the food item?" 
+                                value="<%= foodToBeUpdated[0].TypicalValues %>" required>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="foodValueUnit">Unit of the Typical Value*:</label>
+                            <select name="UnitOfTheTypicalValue" class="form-control" 
+                                    id="foodValueUnit" data-id="<%= foodToBeUpdated[0].UnitOfTheTypicalValue %>"
+                                    value="<%= foodToBeUpdated[0].UnitOfTheTypicalValue %>">
+                                <option <%= foodToBeUpdated[0].UnitOfTheTypicalValue == 'gram' ? 'selected' : '' %>>gram</option>
+                                <option <%= foodToBeUpdated[0].UnitOfTheTypicalValue == 'litre' ? 'selected' : '' %>>litre</option>
+                                <option <%= foodToBeUpdated[0].UnitOfTheTypicalValue == 'tablespoon' ? 'selected' : '' %>>tablespoon</option>
+                                <option <%= foodToBeUpdated[0].UnitOfTheTypicalValue == 'cups' ? 'selected' : '' %>>cups</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="calories">Calories*:</label>
+                        <div class="input-group mb-2">
+                            <input name="Calories" type="number" step="0.01" class="form-control" 
+                                id="calories" placeholder="How much calories does the food item contain?" 
+                                value="<%= foodToBeUpdated[0].Calories %>" required>
+                            <div class="input-group-append">
+                                <div class="input-group-text">kilocalories (kCal)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="carbs">Carbs*:</label>
+                            <div class="input-group mb-2">
+                                <input name="Carbs" type="number" step="0.01" class="form-control" 
+                                    id="carbs" placeholder="How much carbs does the food item contain?" 
+                                    value="<%= foodToBeUpdated[0].Carbs %>" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">grams</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="protein">Protein*:</label>
+                            <div class="input-group mb-2">
+                                <input name="Protein" type="number" step="0.01" class="form-control" 
+                                    id="protein" placeholder="How much protein does the food item contain?" 
+                                    value="<%= foodToBeUpdated[0].Protein %>" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">grams</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="fat">Fat*:</label>
+                            <div class="input-group mb-2">
+                                <input name="Fat" type="number" step="0.01" class="form-control" 
+                                    id="fat" placeholder="How much fat does it contain?" 
+                                    value="<%= foodToBeUpdated[0].Fat %>" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">grams</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="salt">Salt*:</label>
+                            <div class="input-group mb-2">
+                                <input name="Salt" type="number" step="0.01" class="form-control" 
+                                    id="salt" placeholder="How much salt does it contain?"
+                                    value="<%= foodToBeUpdated[0].Salt %>" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">grams</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sugar">Sugar*:</label>
+                            <div class="input-group mb-2">
+                                <input name="Sugar" type="number" step="0.01" class="form-control" 
+                                    id="sugar" placeholder="How much sugar is in it?"
+                                    value="<%= foodToBeUpdated[0].Sugar %>" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">grams</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" id="updateFoodBtn" class="btn btn-primary btn-lg btn-block">Update</button>
+                </fieldset>
+            </form>
+        </main>
+        <script src="/topic7/mid-term/scripts/script.js"></script>
+    </body>
+</html>
