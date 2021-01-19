@@ -4,24 +4,16 @@ const bodyParser = require("body-parser");
 const app = express();
 const mysql = require("mysql");
 const {body, validationResult} = require('express-validator');
-const port = 8089;
+const port = process.env.PORT;
 
 // Initialise the DB object with the neccessary settings.
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
+const db = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
     password: "root",
     database: "CalorieBuddy"
 });
 
-// Connect to the database.
-db.connect((err) => {
-    if (err)
-    {
-        throw error;
-    }
-    console.log("Connected to database");
-});
 global.db = db;
 
 app.use(bodyParser.urlencoded({extended: true}));

@@ -1,12 +1,12 @@
 {
   "name": "mid-term",
   "version": "1.0.0",
-  "description": "",
+  "description": "Calorie Buddy Web App",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Mary-Brenda-Akoda",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -14,5 +14,8 @@
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
     "mysql": "^2.18.1"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
