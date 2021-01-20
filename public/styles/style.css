@@ -128,7 +128,7 @@ header {
   /* Photo by Karolina Grabowska */ 
   /* https://www.foodiesfeed.com/free-food-photo/fresh-tropical-fruits-at-a-market/ */
   background: linear-gradient(rgba(246, 142, 177, 0.5), rgba(0, 0, 0, 0.3) ), 
-                                url("/topic7/mid-term/img/listFoodsBgImg.jpg");
+                                url("../img/listFoodsBgImg.jpg");
   background-size: cover;
   background-position: center 80%;
   background-repeat: no-repeat;

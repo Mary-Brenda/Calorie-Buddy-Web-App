@@ -9,15 +9,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-        <link type="text/css" href="/topic7/mid-term/styles/style.css" rel="stylesheet">
+        <link type="text/css" href="styles/style.css" rel="stylesheet">
     </head>
     <body>
         <!-- Navigation -->
 	    <header>
             <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/topic7/mid-term/">
-                        <img src="/topic7/mid-term/img/logo.png" alt="Calorie Buddy logo">
+                    <a class="navbar-brand" href="/">
+                        <img src="img/logo.png" alt="Calorie Buddy logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
                         <span class="navbar-toggler-icon"></span>
@@ -25,26 +25,26 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="/topic7/mid-term/">Home</a>
+                                <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/topic7/mid-term/about">About</a>
+                                <a class="nav-link" href="/about">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuTab" data-toggle="dropdown"
                                     aria-expanded="false" aria-haspopup="true">Foods</a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuTab">
                                     <li>
-                                        <a class="dropdown-item" href="/topic7/mid-term/add">Add Food</a>
+                                        <a class="dropdown-item" href="/add">Add Food</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/topic7/mid-term/search">Search Food</a>
+                                        <a class="dropdown-item" href="/search">Search Food</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/topic7/mid-term/searchToUpdate">Update Food</a>
+                                        <a class="dropdown-item" href="/searchToUpdate">Update Food</a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="/topic7/mid-term/list">List Foods</a>
+                                        <a class="dropdown-item" href="/list">List Foods</a>
                                     </li>
                                 </ul>
                             </li>
@@ -109,7 +109,7 @@
                                     <td><%= food.Sugar %></td>
                                     <td><input name="qty" type="number" class="form-control qty" id="qty" min="1" value="1" required></td>
                                     <td>
-                                        <form action="/topic7/mid-term/update/<%= food.id %>" method="GET">
+                                        <form action="/update/<%= food.id %>" method="GET">
                                             <button type="submit" class="btn btn-primary update">
                                                 <i class="fas fa-edit"></i>
                                             </button>
@@ -125,7 +125,7 @@
                             <% }) %>
                         <% } else { %>
                                 <tr>
-                                    <td colspan="13" id="no-match">No matching food item found, but don't worry, <a href="/topic7/mid-term/add">click here to add food.</a></td>
+                                    <td colspan="13" id="no-match">No matching food item found, but don't worry, <a href="/add">click here to add food.</a></td>
                                 </tr>
                         <% } %>
                     </tbody>
@@ -146,7 +146,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <form action="/topic7/mid-term/foodDeleted" method="POST" id="deleteSubmission">
+                            <form action="/foodDeleted" method="POST" id="deleteSubmission">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </div>
@@ -173,6 +173,6 @@
                 </div>
             </div>
         </main>
-        <script src="/topic7/mid-term/scripts/script.js"></script>
+        <script src="scripts/script.js"></script>
     </body>
 </html>
