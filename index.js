@@ -10,8 +10,8 @@ const port = process.env.PORT;
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: "root",
-    database: "CalorieBuddy"
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 global.db = db;
