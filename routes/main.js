@@ -136,7 +136,7 @@ module.exports = function (app) {
             if (err)
             {
                 // If database query errors, redirect to home page.
-                res.redirect("/topic7/midterm/");
+                res.redirect("/");
             }
             if (result.length > 0)
             {
@@ -175,7 +175,7 @@ module.exports = function (app) {
             if (err)
             {
                 // If database query errors, redirect to home page.
-                res.redirect("/topic7/midterm/");
+                res.redirect("/");
             }
             res.render("listFoods.html", {availableFoods: result});
         });
