@@ -24,7 +24,7 @@ const deleteBtnIsClicked = (e) => {
     const id = e.getAttribute("data-id");
     const foodName = e.getAttribute("data-food-name");
     const formAction = document.getElementById("deleteSubmission");
-    formAction.setAttribute("action", "/topic7/mid-term/foodDeleted/" + id + "/" + foodName);
+    formAction.setAttribute("action", "/foodDeleted/" + id + "/" + foodName);
 }
 
 
